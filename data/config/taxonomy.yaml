@@ -1,0 +1,578 @@
+# Taxonomy for the synthetic fashion catalogue.
+# category -> subcategories. Each subcategory defines the attribute pools used
+# by the product generator. All generation vocabulary lives here so the
+# generator code stays free of magic strings.
+
+meta:
+  version: 1
+  categories_distribution:        # target shares; enforced exactly at write time
+    men: 0.30
+    women: 0.35
+    kids: 0.20
+    accessories: 0.15
+
+shared:
+  occasions: [casual, formal, party, wedding, office, sports, festive]
+  seasons: [spring, summer, monsoon, autumn, winter, all_season]
+  fits: [slim, regular, relaxed, oversized]
+  stock_status_weights: {in_stock: 0.82, low_stock: 0.10, out_of_stock: 0.06, preorder: 0.02}
+  care_by_fabric:
+    cotton: "Machine wash cold, tumble dry low. Do not bleach."
+    polyester: "Machine wash warm, hang to dry. Iron on low heat if needed."
+    silk: "Dry clean only. Store away from direct sunlight."
+    wool: "Dry clean recommended. Hand wash in cold water with mild detergent."
+    linen: "Machine wash gentle, line dry. Iron while damp for best results."
+    denim: "Machine wash cold inside out. Hang dry to preserve colour."
+    leather: "Wipe with a damp cloth and condition every few months."
+    synthetic_leather: "Wipe clean with a soft damp cloth. Avoid direct heat."
+    georgette: "Hand wash separately in cold water. Do not wring."
+    chiffon: "Dry clean preferred. Steam on low heat only."
+    khadi: "Hand wash in lukewarm water, dry in shade."
+    viscose: "Hand wash cold or machine wash gentle. Lay flat to dry."
+    nylon: "Machine wash cold with like colours. Tumble dry low."
+    canvas: "Spot clean with mild soap; air dry away from sun."
+    jute_blend: "Spot clean only. Keep in a dry, ventilated place."
+    modal: "Machine wash cold, tumble dry low. Resists shrinking."
+    bamboo_rayon: "Machine wash gentle in cold water. Hang to dry."
+    fleece: "Machine wash cold, tumble dry low. Do not iron."
+    satin: "Hand wash cold, hang to dry. Iron on reverse side, low heat."
+    velvet: "Dry clean only. Brush nap gently after wearing."
+    blend: "Machine wash cold with like colours. Tumble dry low."
+    mixed: "Refer to the label inside the garment for washing instructions."
+
+categories:
+  men:
+    gender: men
+    age_groups: [{adult: 0.9}, {teen: 0.1}]
+    subcategories:
+      shirt:
+        size_unit: apparel
+        sizes: ["S", "M", "L", "XL", "XXL"]
+        colors: [navy, white, black, sky blue, maroon, olive, grey, light pink, beige, teal]
+        secondary_colors: [white, navy, black, grey, null, null]
+        fabrics: [cotton, linen, blend, modal, flannel]
+        patterns: [solid, checked, striped, printed]
+        fits: [slim, regular, relaxed]
+        occasions: [casual, formal, party, office, wedding]
+        style_tags: [classic, smart-casual, minimalist, preppy, vintage]
+        base_price: [500, 1800]
+        title_patterns: ["{brand} Men {color} {pattern} Cotton {subcategory}", "{brand} Slim Fit {color} Shirt for Men", "{brand} {pattern} Full Sleeve Casual Shirt", "{brand} {occasion} {color} Shirt"]
+      t-shirt:
+        size_unit: apparel
+        sizes: ["S", "M", "L", "XL", "XXL", "3XL"]
+        colors: [black, white, navy, grey, red, olive, mustard, maroon, sky blue, pink]
+        secondary_colors: [white, black, null, null, grey]
+        fabrics: [cotton, polyester, modal, bamboo_rayon, fleece]
+        patterns: [solid, printed, graphic, striped, heathered]
+        fits: [regular, slim, oversized, relaxed]
+        occasions: [casual, sports, party]
+        style_tags: [streetwear, athleisure, basics, graphic, retro]
+        base_price: [250, 900]
+        title_patterns: ["{brand} Men {color} Round Neck {pattern} T-Shirt", "{brand} Cotton Crew Neck Tee ({size_range})", "{brand} {pattern} Oversized T-Shirt", "{brand} Polo Collar {color} T-Shirt"]
+      pant_trouser:
+        size_unit: waist
+        sizes: ["28", "30", "32", "34", "36", "38"]
+        colors: [black, navy, grey, beige, charcoal, khaki, white]
+        secondary_colors: [null, null, black, navy]
+        fabrics: [cotton, blend, polyester, linen, wool]
+        patterns: [solid, textured, checked, herringbone]
+        fits: [slim, regular, relaxed, tapered]
+        occasions: [formal, office, casual, party, wedding]
+        style_tags: [formal, chinos, cargo, smart-casual, pleated]
+        base_price: [700, 2400]
+        title_patterns: ["{brand} Men {color} {fit} Trouser", "{brand} Stretch Cotton Chinos", "{brand} {fabric} Pleated Formal Trouser", "{brand} Cargo Pants in {color}"]
+      jeans:
+        size_unit: waist
+        sizes: ["28", "30", "32", "34", "36", "38"]
+        colors: [dark blue, medium blue, black, light blue, grey, indigo]
+        secondary_colors: [null, null, tan, black]
+        fabrics: [denim, blend]
+        patterns: [solid, faded, distressed, whiskered]
+        fits: [slim, straight, relaxed, tapered, bootcut]
+        occasions: [casual, party]
+        style_tags: [denim, streetwear, classic, rugged, vintage]
+        base_price: [900, 3200]
+        title_patterns: ["{brand} Men {color} {fit} Jeans", "{brand} Stretch Denim Jeans", "{brand} {pattern} Mid-Rise Jeans", "{brand} Baggy Fit {color} Jeans"]
+      blazer:
+        size_unit: chest
+        sizes: ["36", "38", "40", "42", "44", "46"]
+        colors: [navy, black, grey, brown, beige, bottle green, maroon]
+        secondary_colors: [null, null, black, navy]
+        fabrics: [wool, blend, linen, cotton, velvet]
+        patterns: [solid, checked, pinstripe, herringbone, textured]
+        fits: [slim, regular, relaxed]
+        occasions: [formal, wedding, party, office]
+        style_tags: [tailored, two-button, single-breasted, double-breasted, evening]
+        base_price: [2500, 9000]
+        title_patterns: ["{brand} Men {color} {fit} Blazer", "{brand} {fabric} Two-Button Blazer", "{brand} {pattern} Wedding Blazer", "{brand} Party Wear Structured Blazer"]
+      suit:
+        size_unit: chest
+        sizes: ["36", "38", "40", "42", "44", "46"]
+        colors: [navy, charcoal, black, grey, brown, beige]
+        secondary_colors: [null, black, navy]
+        fabrics: [wool, blend, linen, polyviscose]
+        patterns: [solid, pinstripe, checked, herringbone]
+        fits: [slim, regular, relaxed]
+        occasions: [formal, wedding, office]
+        style_tags: [two-piece, three-piece, tailored, corporate, groom]
+        base_price: [4000, 16000]
+        title_patterns: ["{brand} Men {color} {fit} Two-Piece Suit", "{brand} {fabric} Groom Suit Set", "{brand} {pattern} Corporate Suit", "{brand} Wedding Three-Piece Suit"]
+      jacket:
+        size_unit: chest
+        sizes: ["S", "M", "L", "XL", "XXL"]
+        colors: [black, olive, navy, brown, grey, maroon, beige]
+        secondary_colors: [null, black, cream]
+        fabrics: [leather, nylon, denim, polyester, wool, fleece]
+        patterns: [solid, quilted, colorblock, camo]
+        fits: [slim, regular, relaxed, oversized]
+        occasions: [casual, sports, party]
+        style_tags: [bomber, hoodie, windbreaker, varsity, denim-jacket, rainwear]
+        base_price: [1200, 6500]
+        title_patterns: ["{brand} Men {color} {style} Jacket", "{brand} Quilted Winter Jacket", "{brand} Water-Resistant Windcheater", "{brand} Leather Biker Jacket"]
+      ethnic_wear:
+        size_unit: chest
+        sizes: ["S", "M", "L", "XL", "XXL"]
+        colors: [off-white, maroon, navy, mustard, emerald green, powder blue, ivory, peach]
+        secondary_colors: [gold, silver, maroon, navy, null]
+        fabrics: [silk, cotton, khadi, georgette, velvet, blend]
+        patterns: [embroidered, solid, printed, brocade, sequined]
+        fits: [regular, relaxed, slim]
+        occasions: [festive, wedding, party, casual]
+        style_tags: [kurta, pathani, sherwani, nehru-jacket, dhoti-set]
+        base_price: [900, 12000]
+        title_patterns: ["{brand} Men {color} {pattern} Kurta", "{brand} Festive Silk Sherwani", "{brand} Cotton Pathani Suit", "{brand} Embroidered Nehru Jacket Set"]
+      innerwear:
+        size_unit: apparel
+        sizes: ["S", "M", "L", "XL", "XXL"]
+        colors: [black, white, navy, grey, maroon, skin, multi]
+        secondary_colors: [null, null, null]
+        fabrics: [cotton, modal, nylon, blend, bamboo_rayon]
+        patterns: [solid, striped, pack-of-three]
+        fits: [regular]
+        occasions: [casual]
+        style_tags: [briefs, boxers, vest, trunk, undershirt]
+        base_price: [250, 1200]
+        title_patterns: ["{brand} Men {color} Cotton Underwear Pack", "{brand} Comfort Waistband Boxer Shorts", "{brand} Ribbed Cotton Vest", "{brand} Quick-Dry Trunks"]
+      footwear:
+        size_unit: shoe
+        sizes: ["UK6", "UK7", "UK8", "UK9", "UK10", "UK11"]
+        colors: [black, brown, tan, white, navy, grey, maroon]
+        secondary_colors: [null, white, gum]
+        fabrics: [leather, synthetic_leather, canvas, mesh, suede]
+        patterns: [solid, perforated, two-tone, textured]
+        fits: [regular]
+        occasions: [formal, casual, party, sports, office]
+        style_tags: [oxford, derbies, loafers, sneakers, sandals, boots]
+        base_price: [900, 6000]
+        title_patterns: ["{brand} Men {color} Leather {style}", "{brand} Cushioned Running Sneakers", "{brand} Formal Lace-Up Shoes", "{brand} Slip-On Canvas Loafers"]
+      accessories:
+        size_unit: one_size
+        sizes: ["Free Size"]
+        colors: [black, brown, tan, navy, silver, gold, multi]
+        secondary_colors: [null, black, brown]
+        fabrics: [leather, synthetic_leather, nylon, steel, acetate, cotton, wool]
+        patterns: [solid, textured, braided, logo]
+        fits: [regular]
+        occasions: [formal, casual, party, office, festive]
+        style_tags: [belt, wallet, tie, pocket-square, cap, beanie, scarf, socks, cufflinks]
+        base_price: [200, 2500]
+        title_patterns: ["{brand} Men {color} Leather Belt", "{brand} Slim Wallet with RFID Shield", "{brand} Silk Repp Stripe Tie", "{brand} Wool Muffler Scarf"]
+
+  women:
+    gender: women
+    age_groups: [{adult: 0.92}, {teen: 0.08}]
+    subcategories:
+      top:
+        size_unit: apparel
+        sizes: ["XS", "S", "M", "L", "XL"]
+        colors: [white, black, rose pink, sage green, mustard, sky blue, maroon, cream, lavender]
+        secondary_colors: [white, null, floral, null]
+        fabrics: [cotton, georgette, chiffon, satin, viscose, modal]
+        patterns: [solid, floral, striped, polka-dot, embroidered, ruffle]
+        fits: [regular, relaxed, crop, oversized]
+        occasions: [casual, party, office, festive]
+        style_tags: [peplum, camisole, blouse, off-shoulder, puff-sleeve]
+        base_price: [400, 1800]
+        title_patterns: ["{brand} Women {color} {pattern} Top", "{brand} Ruched Satin Camisole", "{brand} Floral Print Peplum Top", "{brand} Boxy Cotton Blouse"]
+      shirt:
+        size_unit: apparel
+        sizes: ["XS", "S", "M", "L", "XL"]
+        colors: [white, sky blue, pink, olive, navy, cream, red]
+        secondary_colors: [null, white]
+        fabrics: [cotton, linen, flannel, viscose, satin]
+        patterns: [solid, checked, striped, printed]
+        fits: [regular, relaxed, oversized, slim]
+        occasions: [casual, office, formal, party]
+        style_tags: [shirt-blouse, boyfriend, tunics, classic]
+        base_price: [500, 2000]
+        title_patterns: ["{brand} Women {color} Oversized Shirt", "{brand} Straight-Collar Cotton Shirt", "{brand} {pattern} Tunic Shirt", "{brand} Relaxed Linen Button-Down"]
+      dress:
+        size_unit: apparel
+        sizes: ["XS", "S", "M", "L", "XL", "XXL"]
+        colors: [black, navy, maroon, emerald green, mustard, blush pink, white, floral multi]
+        secondary_colors: [gold, null, white, black]
+        fabrics: [georgette, chiffon, cotton, satin, crepe, velvet]
+        patterns: [floral, solid, printed, embroidered, sequined]
+        fits: [fit_and_flare, bodycon, a_line, shift, wrap, maxi]
+        occasions: [party, casual, wedding, festive, office]
+        style_tags: [maxi, midi, mini, co-ord, gown, day-dress]
+        base_price: [700, 5500]
+        title_patterns: ["{brand} Women {color} {pattern} Dress", "{brand} Fit & Flare Party Dress", "{brand} Flowy Maxi Dress", "{brand} Bodycon Sequin Evening Dress"]
+      saree:
+        size_unit: free
+        sizes: ["Free Size"]
+        colors: [maroon, royal blue, emerald green, mustard, pink, gold, ivory, teal]
+        secondary_colors: [gold, contrast border, zari, null]
+        fabrics: [silk, georgette, chiffon, cotton, organza, linen]
+        patterns: [embroidered, printed, brocade, plain_with_border, banarasi]
+        fits: [regular]
+        occasions: [festive, wedding, party, casual]
+        style_tags: [traditional, contemporary, drapes, pre-stitched]
+        base_price: [800, 9000]
+        title_patterns: ["{brand} {color} Silk Saree with Blouse", "{brand} Georgette Embroidered Saree", "{brand} Banarasi Weave Saree", "{brand} Everyday Cotton Saree"]
+      kurti:
+        size_unit: apparel
+        sizes: ["XS", "S", "M", "L", "XL", "XXL"]
+        colors: [indigo, rust orange, mint green, magenta, ivory, turquoise, wine]
+        secondary_colors: [thread work, null, gota-patti]
+        fabrics: [cotton, khadi, rayon, blend, silk]
+        patterns: [printed, embroidered, block-print, chikankari, solid]
+        fits: [a_line, straight, high_slit, angrakha]
+        occasions: [casual, festive, office, party]
+        style_tags: [ethnic, indo-western, daily-wear, festive]
+        base_price: [500, 2600]
+        title_patterns: ["{brand} Women {color} Cotton Kurti", "{brand} Chikankari Straight Kurti", "{brand} Block-Print Angrakha Kurti", "{brand} Festive Silk Blend Kurti"]
+      pant_trouser:
+        size_unit: waist_in
+        sizes: ["24", "26", "28", "30", "32", "34"]
+        colors: [black, navy, beige, grey, white, olive]
+        secondary_colors: [null, black]
+        fabrics: [cotton, blend, viscose, linen, denim]
+        patterns: [solid, textured, pinstripe]
+        fits: [high_waist, wide_leg, cigarette, palazzo, straight]
+        occasions: [office, casual, formal, party]
+        style_tags: [formal, everyday, palazzo, cropped]
+        base_price: [600, 2200]
+        title_patterns: ["{brand} Women {color} High-Waist Trousers", "{brand} Wide-Leg Palazzo Pants", "{brand} Stretch Cigarette Pants", "{brand} Cropped Straight Pants"]
+      jeans:
+        size_unit: waist_in
+        sizes: ["24", "26", "28", "30", "32", "34"]
+        colors: [dark blue, medium blue, black, light blue, grey, white]
+        secondary_colors: [null, tan]
+        fabrics: [denim, blend]
+        patterns: [solid, distressed, faded, ripped]
+        fits: [skinny, mom, boyfriend, flare, straight, high_waist]
+        occasions: [casual, party]
+        style_tags: [denim, streetwear, vintage, everyday]
+        base_price: [900, 3200]
+        title_patterns: ["{brand} Women {color} {fit} Jeans", "{brand} High-Rise Mom Jeans", "{brand} Bootcut Flare Jeans", "{brand} Skinny Stretch Jeans"]
+      skirt:
+        size_unit: apparel
+        sizes: ["XS", "S", "M", "L", "XL"]
+        colors: [black, navy, beige, maroon, olive, pastel pink]
+        secondary_colors: [null, white]
+        fabrics: [cotton, denim, georgette, satin, blend]
+        patterns: [solid, pleated, floral, checked, tiered]
+        fits: [a_line, midi, mini, max, wrap]
+        occasions: [casual, party, office]
+        style_tags: [everyday, boho, preppy, evening]
+        base_price: [500, 2200]
+        title_patterns: ["{brand} Women {color} A-Line Skirt", "{brand} Pleated Midi Skirt", "{brand} Denim Wrap Skirt", "{brand} Tiered Boho Skirt"]
+      blazer:
+        size_unit: apparel
+        sizes: ["XS", "S", "M", "L", "XL"]
+        colors: [black, beige, navy, pastels, check multi, white]
+        secondary_colors: [null, satin-lapel]
+        fabrics: [blend, wool, cotton, linen, satin]
+        patterns: [solid, checked, pinstripe]
+        fits: [oversized, slim, regular, cropped]
+        occasions: [formal, office, party, wedding]
+        style_tags: [power-suit, tailored, double-breasted, evening]
+        base_price: [1500, 6500]
+        title_patterns: ["{brand} Women {color} Tailored Blazer", "{brand} Double-Breasted Oversized Blazer", "{brand} Cropped Evening Blazer", "{brand} Herringbone Work Blazer"]
+      jacket:
+        size_unit: apparel
+        sizes: ["XS", "S", "M", "L", "XL"]
+        colors: [black, cream, olive, burgundy, beige, pink]
+        secondary_colors: [null, shearling]
+        fabrics: [faux_leather, denim, nylon, wool, corduroy]
+        patterns: [solid, quilted, embroidered]
+        fits: [cropped, oversized, regular, fitted]
+        occasions: [casual, party]
+        style_tags: [bomber, moto, trench, puffer, denim-jacket]
+        base_price: [1200, 5500]
+        title_patterns: ["{brand} Women {color} Faux Leather Jacket", "{brand} Cropped Bomber Jacket", "{brand} Quilted Puffer Coat", "{brand} Classic Trench Jacket"]
+      innerwear:
+        size_unit: bra
+        sizes: ["32A", "32B", "34B", "34C", "36C", "36D", "Free Size"]
+        colors: [black, skin, white, rose, navy, maroon]
+        secondary_colors: [lace, null]
+        fabrics: [nylon, cotton, modal, lace, blend]
+        patterns: [solid, lace, seamless]
+        fits: [regular]
+        occasions: [casual]
+        style_tags: [bra, panties, camisole, shapewear, sports-bra, bralette]
+        base_price: [300, 1600]
+        title_patterns: ["{brand} Non-Padded Bralette", "{brand} Seamless Everyday Bra", "{brand} Shaping Camisole", "{brand} Pack of 3 Cotton Panties"]
+      footwear:
+        size_unit: shoe_w
+        sizes: ["UK3", "UK4", "UK5", "UK6", "UK7", "UK8"]
+        colors: [black, nude, gold, silver, red, tan, white, blush]
+        secondary_colors: [null, glitter, pearl]
+        fabrics: [faux_leather, suede, canvas, jute_blend, mesh]
+        patterns: [solid, embellished, woven, buckle]
+        fits: [regular]
+        occasions: [party, casual, formal, festive, office]
+        style_tags: [heels, flats, sandals, kolhapuri, sneakers, wedges, mojri]
+        base_price: [600, 4500]
+        title_patterns: ["{brand} Women {color} Block Heel Sandals", "{brand} Embellished Party Flats", "{brand} Strappy Stiletto Heels", "{brand} Everyday Cushioned Sneakers"]
+      accessories:
+        size_unit: one_size
+        sizes: ["Free Size"]
+        colors: [black, tan, gold, silver, red, multi, rose]
+        secondary_colors: [null, chain, pearl]
+        fabrics: [faux_leather, steel, brass, fabric, resin, cane]
+        patterns: [solid, woven, embellished, quilted]
+        fits: [regular]
+        occasions: [casual, party, formal, festive, office]
+        style_tags: [handbag, tote, sling, earrings, necklace, bangle, hair-accessory, belt, watch, sunglasses]
+        base_price: [300, 4000]
+        title_patterns: ["{brand} Women {color} Quilted Crossbody Bag", "{brand} Gold-Tone Statement Earrings", "{brand} Woven Tote Bag", "{brand} Crystal Hair Clip Set"]
+
+  kids:
+    gender: kids
+    age_groups: [{boys: 0.45}, {girls: 0.45}, {infants: 0.10}]
+    subcategories:
+      t-shirt:
+        size_unit: kids_apparel
+        sizes: ["2-3Y", "3-4Y", "4-5Y", "5-6Y", "7-8Y", "9-10Y"]
+        colors: [red, blue, pink, yellow, green, white, navy, multi]
+        secondary_colors: [print, null]
+        fabrics: [cotton, bamboo_rayon, blend]
+        patterns: [graphic, cartoon-print, solid, striped]
+        fits: [regular, relaxed]
+        occasions: [casual, party, sports]
+        style_tags: [playwear, school, character]
+        base_price: [200, 800]
+        title_patterns: ["{brand} Kids {color} Graphic T-Shirt", "{brand} Cartoon Print Cotton Tee", "{brand} Pack of 2 Basic Tees", "{brand} Fun Phrase Round-Neck Tee"]
+      shirt:
+        size_unit: kids_apparel
+        sizes: ["2-3Y", "3-4Y", "4-5Y", "5-6Y", "7-8Y", "9-10Y"]
+        colors: [white, sky blue, pink, checks multi, lime, coral]
+        secondary_colors: [null, contrast]
+        fabrics: [cotton, linen, blend]
+        patterns: [checked, solid, printed, striped]
+        fits: [regular]
+        occasions: [casual, formal, party, festive]
+        style_tags: [school, occasion, everyday]
+        base_price: [300, 1100]
+        title_patterns: ["{brand} Kids {color} Full-Sleeve Shirt", "{brand} School Uniform Shirt", "{brand} Checked Half-Sleeve Shirt", "{brand} Occasion Wear Bow-Tie Shirt"]
+      dress:
+        size_unit: kids_apparel
+        sizes: ["1-2Y", "2-3Y", "3-4Y", "5-6Y", "7-8Y"]
+        colors: [pink, purple, sky blue, red, yellow, floral multi]
+        secondary_colors: [tulle, null, ribbon]
+        fabrics: [cotton, georgette, satin, net]
+        patterns: [floral, polka-dot, solid, printed]
+        fits: [a_line, frock, fit_and_flare]
+        occasions: [party, casual, festive, wedding]
+        style_tags: [princess, sundress, frock, range]
+        base_price: [400, 1800]
+        title_patterns: ["{brand} Girls {color} Party Frocks", "{brand} Layered Tulle Princess Dress", "{brand} Cotton Sunny Day Dress", "{brand} Floral Print A-Line Dress"]
+      pant:
+        size_unit: kids_waist
+        sizes: ["2-3Y", "3-4Y", "4-5Y", "5-6Y", "7-8Y", "9-10Y"]
+        colors: [navy, grey, black, beige, pink, denimmix]
+        secondary_colors: [null]
+        fabrics: [cotton, blend, denim, fleece]
+        patterns: [solid, striped, cargo-pocket]
+        fits: [regular, relaxed, jogster]
+        occasions: [casual, school, sports]
+        style_tags: [daily, schoolwear, joggers, cargo]
+        base_price: [350, 1100]
+        title_patterns: ["{brand} Kids {color} Stretch Pant", "{brand} Comfort Waistband Joggers", "{brand} School Uniform Trouser", "{brand} Cargo Pocket Pant"]
+      jeans:
+        size_unit: kids_waist
+        sizes: ["2-3Y", "3-4Y", "4-5Y", "5-6Y", "7-8Y"]
+        colors: [blue, black, medium_blue, grey]
+        secondary_colors: [null]
+        fabrics: [denim, blend]
+        patterns: [solid, distressed]
+        fits: [regular, slim, relaxed]
+        occasions: [casual, party]
+        style_tags: [denim, everyday]
+        base_price: [500, 1500]
+        title_patterns: ["{brand} Kids Blue Stretch Jeans", "{brand} Pull-On Denim Jeans", "{brand} Ripped Look Fashion Jeans", "{brand} Slim Fit Kids Jeans"]
+      shorts:
+        size_unit: kids_waist
+        sizes: ["2-3Y", "3-4Y", "4-5Y", "5-6Y", "7-8Y"]
+        colors: [khaki, navy, grey, red, green, multi]
+        secondary_colors: [null]
+        fabrics: [cotton, denim, nylon]
+        patterns: [solid, checked, printed]
+        fits: [relaxed, regular]
+        occasions: [casual, sports]
+        style_tags: [playwear, beach, school]
+        base_price: [250, 800]
+        title_patterns: ["{brand} Kids {color} Cotton Shorts", "{brand} Elastic Waist Cargo Shorts", "{brand} Denim Dungaree Shorts", "{brand} Quick-Dry Sport Shorts"]
+      ethnic_wear:
+        size_unit: kids_apparel
+        sizes: ["1-2Y", "2-3Y", "3-4Y", "5-6Y", "7-8Y"]
+        colors: [ivory, mustard, pink, sky blue, maroon, green]
+        secondary_colors: [gold, gota, null]
+        fabrics: [cotton, silk, blend, georgette]
+        patterns: [embroidered, printed, solid]
+        fits: [regular, relaxed]
+        occasions: [festive, wedding, party]
+        style_tags: [kurta-set, lehenga-choli, nehru-cap-set]
+        base_price: [500, 3000]
+        title_patterns: ["{brand} Kids Festive Kurta Pyjama Set", "{brand} Girls Lehenga Choli Set", "{brand} Embroidered Nehru Cap Kurta Set", "{brand} Silk Blend Ethnic Dress"]
+      jacket:
+        size_unit: kids_apparel
+        sizes: ["2-3Y", "3-4Y", "5-6Y", "7-8Y", "9-10Y"]
+        colors: [navy, red, pink, olive, grey, multi]
+        secondary_colors: [fleece-lined, null]
+        fabrics: [polyester, nylon, fleece, denim]
+        patterns: [solid, colorblock, quilted]
+        fits: [regular, relaxed]
+        occasions: [casual, sports]
+        style_tags: [winterwear, hoodie, windbreaker]
+        base_price: [700, 2400]
+        title_patterns: ["{brand} Kids Winter Hooded Jacket", "{brand} Reversible Puffer Jacket", "{brand} Lightweight Rain Jacket", "{brand} Fleece Lined Bomber"]
+      innerwear:
+        size_unit: kids_apparel
+        sizes: ["2-3Y", "3-4Y", "5-6Y", "7-8Y", "9-10Y"]
+        colors: [white, skin, grey, multi]
+        secondary_colors: [null]
+        fabrics: [cotton, bamboo_rayon, modal]
+        patterns: [solid, striped]
+        fits: [regular]
+        occasions: [casual]
+        style_tags: [vest, panties, thermals]
+        base_price: [200, 700]
+        title_patterns: ["{brand} Kids Cotton Vest Pack", "{brand} Soft Combed Cotton Panties", "{brand} Thermal Winter Innerwear Set", "{brand} Plain Cotton Undershirt"]
+      footwear:
+        size_unit: kids_shoe
+        sizes: ["UK1", "UK2", "UK3", "UK4", "UK5", "UK8", "UK9", "UK10"]
+        colors: [multi, red, blue, pink, white, black]
+        secondary_colors: [velcro, light-up]
+        fabrics: [mesh, canvas, synthetic_leather, rubber]
+        patterns: [solid, colorblock, printed]
+        fits: [regular]
+        occasions: [casual, sports, school, party]
+        style_tags: [sneakers, sandals, school-shoes, floaters]
+        base_price: [400, 1800]
+        title_patterns: ["{brand} Kids Velcro Strap Sneakers", "{brand} Light-Up Sports Shoes", "{brand} School Black Canvas Shoes", "{brand} Anti-Skid Rubber Floaters"]
+      accessories:
+        size_unit: one_size
+        sizes: ["Free Size"]
+        colors: [multi, blue, pink, red, navy]
+        secondary_colors: [null]
+        fabrics: [canvas, nylon, cotton, plastic]
+        patterns: [printed, solid, character]
+        fits: [regular]
+        occasions: [casual, school, festive]
+        style_tags: [cap, backpack, socks, hair-band, lunch-bag]
+        base_price: [150, 900]
+        title_patterns: ["{brand} Kids Character Print Backpack", "{brand} Cotton No-Show Sock Pack", "{brand} Adjustable Baseball Cap", "{brand} Fun Hair Band Set"]
+
+  accessories:
+    gender: unisex
+    age_groups: [{adult: 1.0}]
+    subcategories:
+      bags:
+        size_unit: volume
+        sizes: ["Small", "Medium", "Large"]
+        colors: [black, brown, tan, navy, grey, olive]
+        secondary_colors: [null, trim]
+        fabrics: [leather, synthetic_leather, nylon, canvas, jute_blend]
+        patterns: [solid, textured, logo, quilted]
+        fits: [regular]
+        occasions: [casual, formal, office, sports, travel]
+        style_tags: [backpack, laptop-bag, sling, duffel, tote, messenger]
+        base_price: [600, 6000]
+        title_patterns: ["{brand} Unisex Water-Resistant Laptop Backpack", "{brand} Leather Messenger Bag", "{brand} Travel Duffel with Shoe Compartment", "{brand} Everyday Slate Sling Bag"]
+      watches:
+        size_unit: one_size
+        sizes: ["Free Size"]
+        colors: [silver, gold, black, rose-gold, blue]
+        secondary_colors: [leather strap, steel bracelet]
+        fabrics: [steel, synthetic_leather, nylon, resin]
+        patterns: [solid, chronograph, minimal]
+        fits: [regular]
+        occasions: [formal, casual, office, sports, party]
+        style_tags: [analog, digital, chronograph, smartwatch, minimal]
+        base_price: [1000, 12000]
+        title_patterns: ["{brand} Minimalist Analog Watch", "{brand} Chronograph Steel Bracelet Watch", "{brand} Fitness Digital Watch", "{brand} Rose-Gold Dial Party Watch"]
+      sunglasses:
+        size_unit: one_size
+        sizes: ["Free Size"]
+        colors: [black, tortoise, gunmetal, brown, gold]
+        secondary_colors: [polarised lens, mirror lens]
+        fabrics: [acetate, steel, polycarbonate]
+        patterns: [solid, gradient]
+        fits: [regular]
+        occasions: [casual, sports, party, travel]
+        style_tags: [aviator, wayfarer, round, sport, cat-eye]
+        base_price: [600, 5000]
+        title_patterns: ["{brand} Polarised Aviator Sunglasses", "{brand} Classic Wayfarer Shades", "{brand} Round Retro Sunglasses", "{brand} UV-Protection Sport Shades"]
+      belts:
+        size_unit: waist
+        sizes: ["28", "30", "32", "34", "36", "38"]
+        colors: [black, brown, tan, reversible-black-brown]
+        secondary_colors: [buckle]
+        fabrics: [leather, synthetic_leather, canvas]
+        patterns: [solid, textured, braided]
+        fits: [regular]
+        occasions: [formal, casual, office]
+        style_tags: [auto-lock, pin-buckle, dress, reversible]
+        base_price: [300, 2000]
+        title_patterns: ["{brand} Genuine Leather Formal Belt", "{brand} Reversible Auto-Lock Belt", "{brand} Casual Canvas Belt", "{brand} Pin Buckle Dress Belt"]
+      wallets:
+        size_unit: one_size
+        sizes: ["Free Size"]
+        colors: [black, brown, tan, navy]
+        secondary_colors: [stitching]
+        fabrics: [leather, synthetic_leather, nylon]
+        patterns: [solid, textured, quilted]
+        fits: [regular]
+        occasions: [casual, formal, office]
+        style_tags: [bi-fold, tri-fold, card-holder, slim]
+        base_price: [300, 2500]
+        title_patterns: ["{brand} Slim Bi-Fold Leather Wallet", "{brand} RFID-Safe Card Holder", "{brand} Tri-Fold Wallet with Coin Pouch", "{brand} Minimalist Front-Pocket Wallet"]
+      scarves_stoles:
+        size_unit: one_size
+        sizes: ["Free Size"]
+        colors: [grey, beige, maroon, navy, pastel multi, black]
+        secondary_colors: [fringe, null]
+        fabrics: [wool, pashmina, cotton, silk, viscose]
+        patterns: [solid, checked, printed, embroidered]
+        fits: [regular]
+        occasions: [casual, formal, festive, party]
+        style_tags: [muffler, stole, dupatta, shawl]
+        base_price: [400, 4000]
+        title_patterns: ["{brand} Soft-touch Wool Muffler", "{brand} Printed Viscose Scarf", "{brand} Festive Pashmina Stole", "{brand} Checkered Winter Shawl"]
+      socks:
+        size_unit: sock
+        sizes: ["Free Size"]
+        colors: [black, white, grey, navy, multi]
+        secondary_colors: [stripes, null]
+        fabrics: [cotton, blend, wool, nylon]
+        patterns: [solid, striped, argyle, novelty]
+        fits: [regular]
+        occasions: [casual, sports, formal, office]
+        style_tags: [crew, no-show, ankle, compression]
+        base_price: [150, 800]
+        title_patterns: ["{brand} Combed Cotton Crew Socks (Pack of 3)", "{brand} Cushioned Sports Socks", "{brand} Formal Thin Socks Pack", "{brand} Fun Novelty Print Socks"]
+      caps_hats:
+        size_unit: one_size
+        sizes: ["Free Size"]
+        colors: [black, navy, grey, olive, red, white]
+        secondary_colors: [logo]
+        fabrics: [cotton, denim, wool, nylon]
+        patterns: [solid, embroidered, camo]
+        fits: [regular]
+        occasions: [casual, sports, travel]
+        style_tags: [baseball-cap, bucket-hat, beanie, visor]
+        base_price: [200, 1200]
+        title_patterns: ["{brand} Adjustable Baseball Cap", "{brand} Rib-Knit Winter Beanie", "{brand} Packable Bucket Hat", "{brand} Quick-Dry Running Visor"]

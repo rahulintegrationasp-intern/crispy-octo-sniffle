@@ -1,0 +1,120 @@
+# Price model. MRP = subcategory base_price sampled uniformly, scaled by the
+# brand tier multiplier and a per-product jitter. Selling price = MRP * (1 - discount).
+# Bands are sanity ranges used by validators: any selling price outside the
+# category band for its subcategory+tier fails validation.
+
+rounding:
+  mrp_endings: [0, 9, 49, 99, 95, 90]     # retail-style price endings
+  max_discount_percent: 80
+  min_discount_percent: 0
+  discount_weights:                        # P(discount bucket) — many items barely discounted
+    none_0_5: 0.22
+    light_5_15: 0.30
+    mid_15_40: 0.33
+    heavy_40_80: 0.15
+
+bands:                                     # [min, max] selling price in INR, per tier
+  shirt:
+    budget:   [300, 1600]
+    mid:      [500, 2600]
+    premium:  [1200, 6000]
+  t-shirt:
+    budget:   [200, 900]
+    mid:      [350, 1500]
+    premium:  [900, 3000]
+  pant_trouser:
+    budget:   [550, 1800]
+    mid:      [800, 3200]
+    premium:  [1800, 7000]
+  jeans:
+    budget:   [700, 1800]
+    mid:      [1100, 3200]
+    premium:  [2200, 7000]
+  blazer:
+    budget:   [1800, 3500]
+    mid:      [2800, 6500]
+    premium:  [5000, 18000]
+  suit:
+    budget:   [3200, 6000]
+    mid:      [4800, 11000]
+    premium:  [9000, 30000]
+  jacket:
+    budget:   [900, 2200]
+    mid:      [1500, 4500]
+    premium:  [3500, 12000]
+  ethnic_wear:
+    budget:   [700, 2000]
+    mid:      [1200, 4500]
+    premium:  [3000, 15000]
+  innerwear:
+    budget:   [200, 700]
+    mid:      [350, 1200]
+    premium:  [700, 2500]
+  footwear:
+    budget:   [600, 1600]
+    mid:      [1100, 3500]
+    premium:  [2500, 8000]
+  accessories:                             # in-category accessory subcats (belt/wallet/tie...)
+    budget:   [150, 800]
+    mid:      [350, 1600]
+    premium:  [900, 4000]
+  top:
+    budget:   [350, 1000]
+    mid:      [550, 1800]
+    premium:  [1100, 3500]
+  dress:
+    budget:   [550, 1500]
+    mid:      [900, 3000]
+    premium:  [2000, 8000]
+  saree:
+    budget:   [600, 1800]
+    mid:      [1100, 4000]
+    premium:  [2800, 12000]
+  kurti:
+    budget:   [400, 1100]
+    mid:      [650, 2000]
+    premium:  [1300, 4000]
+  skirt:
+    budget:   [400, 1100]
+    mid:      [650, 1900]
+    premium:  [1200, 3500]
+  pant:
+    budget:   [300, 800]
+    mid:      [450, 1300]
+    premium:  [800, 2200]
+  shorts:
+    budget:   [220, 650]
+    mid:      [350, 950]
+    premium:  [600, 1600]
+  bags:
+    budget:   [500, 1500]
+    mid:      [900, 3000]
+    premium:  [2200, 8000]
+  watches:
+    budget:   [600, 1800]
+    mid:      [1500, 4500]
+    premium:  [4000, 15000]
+  sunglasses:
+    budget:   [500, 1200]
+    mid:      [900, 2200]
+    premium:  [1800, 6000]
+  belts:
+    budget:   [250, 700]
+    mid:      [450, 1300]
+    premium:  [900, 3000]
+  wallets:
+    budget:   [250, 700]
+    mid:      [450, 1400]
+    premium:  [900, 3500]
+  scarves_stoles:
+    budget:   [300, 900]
+    mid:      [550, 1800]
+    premium:  [1200, 4500]
+  socks:
+    budget:   [130, 400]
+    mid:      [250, 700]
+    premium:  [450, 1200]
+  caps_hats:
+    budget:   [180, 500]
+    mid:      [300, 800]
+    premium:  [550, 1500]
