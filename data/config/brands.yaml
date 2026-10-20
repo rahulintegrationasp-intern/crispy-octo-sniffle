@@ -1,0 +1,138 @@
+# Brand registry. tier drives price multipliers (see price_bands.yaml) and the
+# share of catalogue each brand gets (weight).
+
+tiers:
+  budget:   {price_multiplier: [0.6, 0.9], weight_base: 3}
+  mid:      {price_multiplier: [0.9, 1.3], weight_base: 2}
+  premium:  {price_multiplier: [1.3, 2.2], weight_base: 1}
+
+brands:
+  - {name: "Zara",         tier: premium, categories: [women, men, accessories], weight: 1.2}
+  - {name: "H&M",          tier: mid,     categories: [women, men, kids, accessories], weight: 1.4}
+  - {name: "Uniqlo",       tier: mid,     categories: [men, women, kids, accessories], weight: 1.3}
+  - {name: "Marks & Spencer", tier: mid,  categories: [women, men, kids], weight: 1.0}
+  - {name: "Massimo Dutti",   tier: premium, categories: [men, women], weight: 0.7}
+  - {name: "Levi's",       tier: mid,     categories: [men, women, kids], weight: 1.2}
+  - {name: "Tommy Hilfiger",  tier: premium, categories: [men, women, kids, accessories], weight: 0.9}
+  - {name: "Calvin Klein",    tier: premium, categories: [men, women, innerwear], weight: 0.8}
+  - {name: "Lacoste",      tier: premium, categories: [men, women], weight: 0.5}
+  - {name: "Nike",         tier: mid,     categories: [men, women, kids, accessories], weight: 1.6}
+  - {name: "Adidas",       tier: mid,     categories: [men, women, kids, accessories], weight: 1.6}
+  - {name: "Puma",         tier: budget,  categories: [men, women, kids], weight: 1.4}
+  - {name: "Skechers",     tier: mid,     categories: [men, women, kids], weight: 1.1}
+  - {name: "Woodland",     tier: mid,     categories: [men, women, accessories], weight: 0.9}
+  - {name: "Clarks",       tier: premium, categories: [men, women, kids], weight: 0.7}
+  - {name: "Bata",         tier: budget,  categories: [men, women, kids], weight: 1.3}
+  - {name: "Metro",        tier: budget,  categories: [men, women, kids], weight: 1.0}
+  - {name: "Liberty",      tier: budget,  categories: [men, women], weight: 0.6}
+  - {name: "Van Heusen",   tier: mid,     categories: [men], weight: 1.5}
+  - {name: "Allen Solly",  tier: mid,     categories: [men, women], weight: 1.4}
+  - {name: "Peter England",tier: budget,  categories: [men], weight: 1.5}
+  - {name: "Louis Philippe", tier: premium, categories: [men], weight: 0.9}
+  - {name: "Arrow",        tier: mid,     categories: [men, women], weight: 1.0}
+  - {name: "US Polo Assn.", tier: mid,    categories: [men, women, kids], weight: 1.3}
+  - {name: "U.S. Polo",    tier: mid,     categories: [men], weight: 0.4}
+  - {name: "HRX by Hrithik Roshan", tier: budget, categories: [men, women], weight: 0.9}
+  - {name: "Dressberry",   tier: budget,  categories: [kids], weight: 0.8}
+  - {name: "Maxima",       tier: budget,  categories: [kids], weight: 0.7}
+  - {name: "Hopscotch",    tier: mid,     categories: [kids], weight: 0.6}
+  - {name: "Rabbit & Frog", tier: mid,    categories: [kids], weight: 0.4}
+  - {name: "Lily & Pod",   tier: mid,     categories: [kids], weight: 0.3}
+  - {name: "Westside",     tier: mid,     categories: [women], weight: 1.0}
+  - {name: "W for Women",  tier: budget,  categories: [women], weight: 1.1}
+  - {name: "Aurelia",      tier: budget,  categories: [women], weight: 0.9}
+  - {name: "Clovia",       tier: mid,     categories: [women], weight: 0.9}
+  - {name: "Jockey",       tier: mid,     categories: [women, men], weight: 0.8}
+  - {name: "Truly Madly",  tier: mid,     categories: [women], weight: 0.5}
+  - {name: "Amante",       tier: mid,     categories: [women], weight: 0.4}
+  - {name: "Zivame",       tier: mid,     categories: [women], weight: 0.7}
+  - {name: "FabIndia",     tier: premium, categories: [women, men], weight: 0.7}
+  - {name: "Biba",         tier: mid,     categories: [women], weight: 1.1}
+  - {name: "Wardrobe",     tier: budget,  categories: [women], weight: 1.0}
+  - {name: "Global Desi",  tier: mid,     categories: [women], weight: 0.5}
+  - {name: "Sangria",      tier: budget,  categories: [women], weight: 0.8}
+  - {name: "Kalki Fashion", tier: premium, categories: [women], weight: 0.4}
+  - {name: "Mirraw",       tier: budget,  categories: [women], weight: 0.9}
+  - {name: "Khushal K",    tier: premium, categories: [women], weight: 0.3}
+  - {name: "Manyavar",     tier: mid,     categories: [men], weight: 1.0}
+  - {name: "Mojito",       tier: budget,  categories: [men], weight: 0.8}
+  - {name: "Taneira",      tier: premium, categories: [women], weight: 0.3}
+  - {name: "Sabyasachi",   tier: premium, categories: [women, men], weight: 0.2}
+  - {name: "Anouk",        tier: mid,     categories: [women], weight: 0.6}
+  - {name: "Albion",       tier: mid,     categories: [men], weight: 0.4}
+  - {name: "John Players", tier: mid,     categories: [men], weight: 0.6}
+  - {name: "Ferruccio Valente", tier: premium, categories: [men], weight: 0.2}
+  - {name: "Raymond",      tier: premium, categories: [men], weight: 0.8}
+  - {name: "Park Avenue",  tier: mid,     categories: [men], weight: 0.9}
+  - {name: "Cottonworld",  tier: budget,  categories: [men], weight: 0.7}
+  - {name: "Wroden",       tier: budget,  categories: [men], weight: 0.8}
+  - {name: "The Indian Garage Co.", tier: budget, categories: [men], weight: 1.0}
+  - {name: "Bewakoof",     tier: budget,  categories: [men, women, accessories], weight: 1.2}
+  - {name: "Souled Store", tier: budget,  categories: [men, women, kids], weight: 0.9}
+  - {name: "Bonnie",       tier: budget,  categories: [women], weight: 0.6}
+  - {name: "Titan",        tier: premium, categories: [accessories, men, women], weight: 0.8}
+  - {name: "Fastrack",     tier: budget,  categories: [accessories], weight: 1.1}
+  - {name: "Casio",        tier: mid,     categories: [accessories], weight: 0.9}
+  - {name: "Sonata",       tier: budget,  categories: [accessories], weight: 0.9}
+  - {name: "Fossil",       tier: premium, categories: [accessories], weight: 0.5}
+  - {name: "Daniel Wellington", tier: premium, categories: [accessories], weight: 0.4}
+  - {name: "Timex",        tier: mid,     categories: [accessories], weight: 0.6}
+  - {name: "Wildcraft",    tier: budget,  categories: [accessories, kids], weight: 1.0}
+  - {name: "American Tourister", tier: mid, categories: [accessories], weight: 0.8}
+  - {name: "Skybags",      tier: budget,  categories: [accessories, kids], weight: 0.9}
+  - {name: "VIP",          tier: mid,     categories: [accessories], weight: 0.6}
+  - {name: "Samsonite",    tier: premium, categories: [accessories], weight: 0.4}
+  - {name: "Mactree",      tier: budget,  categories: [accessories], weight: 0.4}
+  - {name: "Ventures",     tier: budget,  categories: [accessories], weight: 0.5}
+  - {name: "Fennic",       tier: budget,  categories: [accessories], weight: 0.3}
+  - {name: "Vincent Kevin", tier: budget, categories: [accessories], weight: 0.4}
+  - {name: "Harley Davidson", tier: mid,  categories: [accessories, men], weight: 0.5}
+  - {name: "Raymond Watch", tier: mid,    categories: [accessories], weight: 0.3}
+  - {name: "Armita",       tier: budget,  categories: [accessories], weight: 0.3}
+  - {name: "Vaibhav",      tier: budget,  categories: [accessories], weight: 0.2}
+  - {name: "Only",         tier: mid,     categories: [women], weight: 0.9}
+  - {name: "Vero Moda",    tier: mid,     categories: [women], weight: 1.0}
+  - {name: "Jack & Jones", tier: mid,     categories: [men], weight: 1.0}
+  - {name: "Just Cool",    tier: budget,  categories: [men], weight: 0.7}
+  - {name: "Dennis Lingo", tier: budget,  categories: [men], weight: 0.9}
+  - {name: "Ketch",        tier: budget,  categories: [men], weight: 0.8}
+  - {name: "Bullmer",      tier: budget,  categories: [men], weight: 0.4}
+  - {name: "Rugman",       tier: budget,  categories: [men], weight: 0.3}
+  - {name: "Tusker",       tier: budget,  categories: [men, accessories], weight: 0.6}
+  - {name: "Wildcraft Bags", tier: budget, categories: [accessories], weight: 0.3}
+  - {name: "Chumbak",      tier: mid,     categories: [accessories], weight: 0.4}
+  - {name: "Zaveri Pearls", tier: premium, categories: [accessories, women], weight: 0.3}
+  - {name: "Shaya",        tier: mid,     categories: [accessories], weight: 0.2}
+  - {name: "Opa!",         tier: budget,  categories: [accessories, women], weight: 0.5}
+  - {name: "Giva",         tier: mid,     categories: [accessories], weight: 0.4}
+  - {name: "Nautica",      tier: premium, categories: [men, women], weight: 0.5}
+  - {name: "Arrow Sports", tier: budget,  categories: [men], weight: 0.3}
+  - {name: "Landmark Shoes", tier: budget, categories: [men, women], weight: 0.4}
+  - {name: "Lotto",        tier: budget,  categories: [men, women], weight: 0.4}
+  - {name: "Reebok",       tier: mid,     categories: [men, women, kids], weight: 0.9}
+  - {name: "Under Armour", tier: premium, categories: [men, women], weight: 0.6}
+  - {name: "New Balance",  tier: premium, categories: [men, women], weight: 0.5}
+  - {name: "ASICS",        tier: premium, categories: [men, women], weight: 0.4}
+  - {name: "Campus",       tier: budget,  categories: [men, kids], weight: 0.9}
+  - {name: "Red Tape",     tier: mid,     categories: [men], weight: 0.6}
+  - {name: "Activa",       tier: budget,  categories: [women], weight: 0.5}
+  - {name: "Aldo",         tier: premium, categories: [women, men], weight: 0.3}
+  - {name: "Steve Madden", tier: premium, categories: [women], weight: 0.3}
+  - {name: "Colorbar",     tier: mid,     categories: [women], weight: 0.2}
+  - {name: "Kraus",        tier: budget,  categories: [kids], weight: 0.2}
+  - {name: "Naughty",      tier: budget,  categories: [kids], weight: 0.4}
+  - {name: "Peeksuit",     tier: budget,  categories: [kids], weight: 0.3}
+  - {name: "Carter's",     tier: mid,     categories: [kids], weight: 0.4}
+  - {name: "Hanna Andersson", tier: premium, categories: [kids], weight: 0.2}
+  - {name: "Jumbo",        tier: mid,     categories: [accessories, kids], weight: 0.4}
+  - {name: " Aristocat",   tier: premium, categories: [men], weight: 0.2}
+  - {name: "Wilson",       tier: mid,     categories: [accessories], weight: 0.2}
+  - {name: "Vincico",      tier: budget,  categories: [accessories], weight: 0.3}
+  - {name: "Zeeloop",      tier: budget,  categories: [accessories], weight: 0.4}
+  - {name: "Impetum",      tier: budget,  categories: [accessories], weight: 0.3}
+  - {name: "Casio Vintage", tier: mid,    categories: [accessories], weight: 0.2}
+  - {name: "Fila",         tier: mid,     categories: [men, women, kids], weight: 0.5}
+  - {name: "Superdry",     tier: premium, categories: [men, women], weight: 0.3}
+  - {name: "Pull&Bear",    tier: budget,  categories: [men, women], weight: 0.5}
+  - {name: "Bershka",      tier: budget,  categories: [women], weight: 0.5}
+  - {name: "Stradivarius", tier: budget,  categories: [women], weight: 0.4}

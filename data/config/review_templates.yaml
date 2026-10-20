@@ -1,0 +1,214 @@
+# Review generation templates. Composable phrase banks keyed by sentiment and
+# topic so comments stay consistent with the product rating AND the product's
+# attributes (fabric/fit/colour/etc.). Slots like {color}, {fabric}, {item} are
+# filled from the product record; {item} comes from noun_bank per subcategory.
+
+slot_note: >
+  Every bank entry may use: {item} {items} {color} {fabric} {size} {brand}.
+  Banks are grouped by topic (quality, fit, colour, comfort, value, delivery,
+  style, service) so the generator can compose 1-4 sentences without repeating
+  whole sentences across reviews.
+
+noun_bank:
+  default: ["this {subcategory_word}", "the product", "it"]
+  shirt: ["this shirt", "the shirt"]
+  t-shirt: ["this tee", "the t-shirt"]
+  pant_trouser: ["these trousers", "the pants"]
+  jeans: ["these jeans", "the jeans"]
+  blazer: ["this blazer", "the jacket"]
+  suit: ["this suit", "the suit set"]
+  jacket: ["this jacket", "the jacket"]
+  ethnic_wear: ["this kurta set", "the outfit"]
+  innerwear: ["this pack", "the underwear"]
+  footwear: ["these shoes", "the pair"]
+  accessories: ["this accessory", "the item"]
+  top: ["this top", "the top"]
+  dress: ["this dress", "the dress"]
+  saree: ["this saree", "the saree"]
+  kurti: ["this kurti", "the kurti"]
+  skirt: ["this skirt", "the skirt"]
+  pant: ["these pants", "the pants"]
+  shorts: ["these shorts", "the shorts"]
+  bags: ["this bag", "the bag"]
+  watches: ["this watch", "the watch"]
+  sunglasses: ["these sunglasses", "the shades"]
+  belts: ["this belt", "the belt"]
+  wallets: ["this wallet", "the wallet"]
+  scarves_stoles: ["this stole", "the scarf"]
+  socks: ["this sock pack", "the socks"]
+  caps_hats: ["this cap", "the cap"]
+
+subcategory_words:
+  shirt: shirt
+  t-shirt: t-shirt
+  pant_trouser: trousers
+  jeans: jeans
+  blazer: blazer
+  suit: suit
+  jacket: jacket
+  ethnic_wear: kurta
+  innerwear: innerwear
+  footwear: shoes
+  accessories: accessory
+  top: top
+  dress: dress
+  saree: saree
+  kurti: kurti
+  skirt: skirt
+  pant: pants
+  shorts: shorts
+  bags: bag
+  watches: watch
+  sunglasses: sunglasses
+  belts: belt
+  wallets: wallet
+  scarves_stoles: stole
+  socks: socks
+  caps_hats: cap
+
+rating_weights:            # global prior for drawing a review's star rating
+  "1": 0.06
+  "2": 0.07
+  "3": 0.12
+  "4": 0.30
+  "5": 0.45
+
+product_quality_shift:     # how a product's latent quality shifts its review mix
+  # quality in [0,1]; high-quality products skew to 4-5, low ones get more 1-2s.
+  method: "dirichlet-style reweighting; see review_generator.py"
+
+sentiment_by_rating:       # enforced consistency
+  "5": positive
+  "4": positive
+  "3": neutral
+  "2": negative
+  "1": negative
+
+size_feedback_weights:     # P(size_feedback | rating)
+  positive: {runs_small: 0.22, true_to_size: 0.62, runs_large: 0.16}
+  neutral:  {runs_small: 0.30, true_to_size: 0.45, runs_large: 0.25}
+  negative: {runs_small: 0.40, true_to_size: 0.25, runs_large: 0.35}
+
+titles:
+  positive:
+    - "Great buy!"
+    - "Loved it"
+    - "Exactly as shown"
+    - "Worth every rupee"
+    - "Very happy with this"
+    - "Comfortable and stylish"
+    - "Good quality for the price"
+    - "My kid loves it"
+    - "Perfect for office wear"
+    - "Impressed by the fabric"
+    - "Nice fit and finish"
+    - "Would buy again"
+  neutral:
+    - "Okay for the price"
+    - "Decent but not exceptional"
+    - "Average product"
+    - "It is what it is"
+    - "Mixed feelings"
+    - "Could be better"
+    - "So-so experience"
+    - "Fine for daily use"
+  negative:
+    - "Disappointed"
+    - "Not as expected"
+    - "Poor stitching"
+    - "Run before ordering"
+    - "Colour is different"
+    - "Waste of money"
+    - "Bad fabric quality"
+    - "Returned it"
+
+positive_bank:
+  quality:
+    - "The {fabric} feels premium and the stitching on {item} is neat."
+    - "Quality of {item} is honestly better than what I expected at this price."
+    - "Fabric is soft, well finished, and no loose threads anywhere."
+    - "Was sceptical ordering {color} online but the shade matches the photos perfectly."
+    - "Third wash already and the colour of {item} has not faded at all."
+    - "Seams and hems are solid; {item} looks like it will last seasons."
+  fit:
+    - "Sizing is spot-on — ordered my usual {size} and it fits like a charm."
+    - "The {fit_desc} cut suits me well and isn't boxy at all."
+    - "Fit is true to the size chart; shoulders sit exactly right."
+    - "Ordered {size} after reading reviews and it was the perfect call."
+  comfort:
+    - "Super comfortable even after 8-9 hours of wear."
+    - "Breathable fabric — no sweating issues even in summers."
+    - "Lightweight and soft against the skin; {item} is an all-day wear now."
+  value:
+    - "Got it on sale and it feels like a much costlier product."
+    - "For this price you genuinely cannot complain about {item}."
+    - "Better than two similar pieces I've paid more for."
+  style:
+    - "Gets compliments every time I wear {item}."
+    - "The {pattern_desc} look is subtle and goes with most of my wardrobe."
+    - "Looks exactly like the picture, minus any cheap sheen."
+  service:
+    - "Delivery was quick and packaging was tidy."
+    - "Brand {brand} never disappoints on finishing."
+
+neutral_bank:
+  quality:
+    - "Fabric is okay — nothing luxurious but it does the job."
+    - "{item} is decent for the price; a few loose threads near the inside seam."
+    - "Average quality overall, nothing that stands out either way."
+  fit:
+    - "Fit is acceptable though the sleeves felt a touch long on me."
+    - "Size chart helped, but {item} sits looser than I expected around the waist."
+    - "Fits fine if you prefer a relaxed drape; not for those wanting snug wear."
+  expectation:
+    - "Colour is slightly duller than the photos but still wearable."
+    - "Material is thinner than I assumed from the images."
+    - "Looks good new; we'll see how {item} holds up after more washes."
+  value:
+    - "Reasonable buy if you grabbed it discounted; full price would feel steep."
+    - "It's an average product at an average price."
+  mixed:
+    - "Likes: comfortable fabric. Dislikes: the buttons feel cheap."
+    - "Good purchase for occasional use, not for heavy rotation."
+
+negative_bank:
+  fabric:
+    - "Fabric is rough and scratchy — returned {item} the same day."
+    - "Material is paper-thin; nowhere close to what {brand} usually sells."
+    - "{fabric} quality is poor, it pilled after a single wash."
+  color:
+    - "Colour faded badly after first wash; the {color} looked washed out."
+    - "Shade is completely different from the photo — much darker in person."
+    - "Colour bleed stained another garment in the wash. Very upset."
+  stitching:
+    - "Stitching came open at the side seam within a week."
+    - "Buttons were loose and one fell off before first wear."
+    - "Hem is uneven and the finishing inside {item} is sloppy."
+  fit:
+    - "Runs very small — had to exchange twice and still doesn't fit."
+    - "Ordered {size} but {item} is enormous; size chart is useless."
+    - "Shoulders pull and the length is off; tailoring needed extra."
+  comfort:
+    - "Itchy material and stiff seams; uncomfortable beyond an hour."
+    - "No breathability at all — felt clammy wearing {item} outdoors."
+  value:
+    - "Overpriced junk; local market gives better quality for half this amount."
+    - "Not worth ₹{price} even on discount. Total letdown."
+  service:
+    - "Took two weeks to deliver and the packet arrived torn."
+    - "Exchange process was painful; support kept deflecting."
+  smell:
+    - "Strong chemical smell straight out of the package."
+    - "Odd odour even after washing twice; had to keep it outside."
+
+occasion_context:          # optional context sentence appended occasionally
+  wedding: ["Bought this for a wedding and it photographed beautifully.", "Wore {item} to a reception — held up all night."]
+  office: ["Perfect addition to my work wardrobe.", "Wearing {item} daily to the office now."]
+  casual: ["Ideal for weekend outings.", "My go-to pick for casual Fridays."]
+  festive: ["Bought for the festive season and it feels special.", "Great gift choice too — packed well."]
+  sports: ["Used it for gym and morning runs; sweat-wicking works.", "Comfortable through long walks."]
+
+closing_lines:             # probabilistic closers for variety
+  positive: ["Highly recommend.", "Five stars from me.", "Buying more colours.", "Happy customer here.", "Go for it blindfolded."]
+  neutral: ["Might consider other colours.", "Keeping it but won't rebuy.", "Wait for a sale if you're eyeing this."]
+  negative: ["Would not recommend.", "Avoid unless desperate.", "Demanding a refund."]
