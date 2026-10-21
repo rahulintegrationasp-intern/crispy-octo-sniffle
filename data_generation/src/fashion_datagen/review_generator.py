@@ -116,6 +116,23 @@ class ReviewGenerator:
             "pattern_desc": _pattern_desc(product["pattern"]),
         }
 
+    # Complaint markers the validator checks for in negative reviews.
+    _COMPLAINT_MARKERS = (
+        "fabric", "colour", "color", "stitch", "fit", "smell", "odour",
+        "worth", "overpriced", "deliver", "exchange", "return", "small",
+        "enormous", "thin", "rough", "loose", "uneven", "faded", "bleed",
+        "different", "painful", "torn", "clammy", "itchy", "useless",
+    )
+    _COMPLAINT_FALLBACKS = [
+        "The fabric feels rough and cheap for the price.",
+        "Colour faded noticeably after the first wash.",
+        "Stitching is uneven along the seams.",
+        "Fit is way off compared to the size chart.",
+        "Not worth the price — feels overpriced.",
+        "The fabric is thin and see-through.",
+        "Material smells of a strong chemical odour.",
+    ]
+
     def compose_comment(self, sentiment: str, slots: dict[str, str], occasion: str | None) -> str:
         rng = self.rng
         bank = self.cfg.reviews.bank(sentiment)
@@ -136,7 +153,13 @@ class ReviewGenerator:
             sentences.insert(rng.randint(0, len(sentences)), rng.choice(ctx_lines).format(**slots))
         if rng.random() < 0.4:
             sentences.append(rng.choice(self.cfg.reviews.closers(sentiment)))
-        return " ".join(sentences)
+        comment = " ".join(sentences)
+        # Guarantee negative reviews contain at least one complaint marker
+        if sentiment == "negative":
+            low = comment.lower()
+            if not any(m in low for m in self._COMPLAINT_MARKERS):
+                comment += " " + rng.choice(self._COMPLAINT_FALLBACKS)
+        return comment
 
     # -- main -----------------------------------------------------------------
     def make_reviews(self, product: dict[str, Any]) -> list[dict[str, Any]]:

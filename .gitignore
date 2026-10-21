@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 *.o
 *.obj
+data/raw/
+data/reports/
